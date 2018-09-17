@@ -2,10 +2,6 @@ import requests
 from bs4 import BeautifulSoup as bs
 import pandas as pd
 
-def printList(arr):
-  for item in arr:
-    print(item)
-
 r = requests.get("https://www.statbunker.com/")
 c = r.content
 soup = bs(c, "html.parser")
@@ -31,16 +27,9 @@ for link in links:
     temp = []
     item = tr.findAll("td")
     temp.append(item[1].find("div").text)
-    temp.append(item[2].text)
-    temp.append(item[3].text)
-    temp.append(item[4].text)
-    temp.append(item[5].text)
-    temp.append(item[6].text)
-    temp.append(item[7].text)
-    temp.append(item[8].text)
-    temp.append(item[9].text)
+    for ind in range(2, 10):
+    	temp.append(item[ind].text)
     List.append(temp)
   
   df = pd.DataFrame(List, columns=["Clubs","Matches played","Matches won","Matches drawn","Matches lost","Goals for","Goals against","Goal difference","Points"])
   df.to_csv(link["name"]+".csv",index=False)
-
