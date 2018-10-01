@@ -77,6 +77,14 @@ def get_Res(answer, files):
     df = pd.DataFrame(clubs)
     return df
 
+def get_comboRes(answer, files):
+    ans1, ans2 = answer.split("and")
+    ans2 = ans2.split()
+    for st in ans2[5:]:
+        ans1 += st+" "
+    df = get_Res(ans1, files)
+    status = "Matches "+ ans2[0]
+    print(ans2)
 
 def main():
     # read .csv files in this repositories
