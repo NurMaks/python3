@@ -90,10 +90,18 @@ def main():
         answer = input(">>")
         if answer == "exit" or answer == "close" or answer == "end":
             break
+        
         if answer.split(" ")[0] == "top":
             print(get_Top(answer, files))
+
         elif ("clubs that" in answer and answer.split(" ")[0]=="clubs" and "and" not in answer):
-            print(get_Res(answer, files))
+            df = get_Res(answer, files)
+            status = "Matches "+answer.split()[2]
+            df = df.groupby([status,"Clubs"]).mean()
+            print(df.sort_values(by=[status,'Points'], ascending=False))
+
+        elif ("clubs that" in answer and answer.split(" ")[0]=="clubs" and "and" in answer):
+            print(get_comboRes(answer, files))
 
 if __name__== "__main__":
     main()

@@ -2,7 +2,8 @@
 
 2. clubs that <won, drawn, lost> <more, less> than <number> times in <league name or all league> 
     Example:
-        clubs that won more than 3 times in La Liga
+        clubs that won more than 1 times in La Liga
         clubs that lost less than 2 times in all league
+        clubs that drawn more than 2 times          (will search in all leagues)
 
 4. clubs that won more than 5 times and lost less than 3 times in all league
