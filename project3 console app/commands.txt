@@ -1,10 +1,8 @@
 1. top <number> clubs in <league name>
 
-2. clubs in <league name or all league> who <won, drawn, lost> <more, less> than <number> times
+2. clubs that <won, drawn, lost> <more, less> than <number> times in <league name or all league> 
     Example:
-        clubs in La Liga who lost lest than 5 times
-        clubs in La Liga who won more than 3 times
-
-3. clubs in <league name or all league> that <won, drawn, lost> <more, less> than <number> times
+        clubs that won more than 3 times in La Liga
+        clubs that lost less than 2 times in all league
 
 4. clubs that won more than 5 times and lost less than 3 times in all league
