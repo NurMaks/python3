@@ -87,7 +87,7 @@ def get_comboRes(answer, files):
         if weight=="less" and int(each) > number-1:
             arr_ind.append(i)
     df = df.drop(index=arr_ind)
-    print(df)
+    return df
 
 def main():
     # read .csv files in this repositories
@@ -112,7 +112,11 @@ def main():
             print(df.sort_values(by=[status,'Points'], ascending=False))
 
         elif ("clubs that" in answer and answer.split(" ")[0]=="clubs" and "and" in answer):
-            print(get_comboRes(answer, files))
+            df = get_comboRes(answer, files)
+            status1 = "Matches "+answer.split()[2]
+            status2 = "Matches "+answer.split()[8]
+            df = df.groupby([status1,status2,"Clubs"]).mean()
+            print(df.sort_values(by=[status1,'Points'], ascending=False))
 
 if __name__== "__main__":
     main()
