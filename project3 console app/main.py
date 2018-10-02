@@ -58,16 +58,12 @@ def get_Res(answer, files):
     clubs = []
     def compile(liga):
         df = read_CSV(liga)
+        df.replace("-", 0, inplace=True)
         for i, match in zip(range(0,len(df["Clubs"])), df[status]):
-            try:
-                if match == "-":
-                    match = 0
-                if weight=="more" and int(match)>number-1:
-                    clubs.append(get_Info_DataFrame(df, i))
-                elif weight=="less" and int(match)<number+1:
-                    clubs.append(get_Info_DataFrame(df, i))
-            except:
-                pass
+            if weight=="more" and int(match)>number-1:
+                clubs.append(get_Info_DataFrame(df, i))
+            elif weight=="less" and int(match)<number+1:
+                clubs.append(get_Info_DataFrame(df, i))
     if "All League" in league or len(league)==0:
         for liga in files:
             compile(liga)
@@ -84,7 +80,14 @@ def get_comboRes(answer, files):
         ans1 += st+" "
     df = get_Res(ans1, files)
     status = "Matches "+ ans2[0]
-    print(ans2)
+    number = int(ans2[3])
+    weight = ans2[1]
+    arr_ind = []
+    for i, each in zip(range(0,len(df)), df[status]):
+        if weight=="less" and int(each) > number-1:
+            arr_ind.append(i)
+    df = df.drop(index=arr_ind)
+    print(df)
 
 def main():
     # read .csv files in this repositories

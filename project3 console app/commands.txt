@@ -6,5 +6,5 @@
         clubs that lost less than 2 times in all league
         clubs that drawn more than 2 times          (will search in all leagues)
 
-3. clubs that won more than 5 times and lost less than 3 times in all league
+3. clubs that won more than 4 times and lost less than 3 times in English League One
 
