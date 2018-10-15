@@ -1,21 +1,21 @@
 Clubs,Matches played,Matches won,Matches drawn,Matches lost,Goals for,Goals against,Goal difference,Points
-Paris Saint-Germain,4,4,-,-,13,4,9,12
-Dijon FCO,4,3,-,1,8,3,5,9
-Toulouse,4,3,-,1,5,6,-1,9
-Lille OSC,4,2,1,1,6,2,4,7
-Olympique Marseille,4,2,1,1,10,7,3,7
-Stade Rennes,4,2,1,1,6,5,1,7
-Montpellier HSC,4,2,1,1,4,3,1,7
-Olympique Lyonnais,4,2,-,2,4,2,2,6
-AS Saint-Etienne,4,1,3,-,3,2,1,6
-Nimes Olympique,4,2,-,2,9,9,0,6
-Stade Reims,4,2,-,2,3,5,-2,6
-Caen,4,1,2,1,4,5,-1,5
-AS Monaco,4,1,1,2,6,6,0,4
-SC Amiens,4,1,1,2,5,5,0,4
-RC Strasbourg,4,1,1,2,5,6,-1,4
-FC Nantes,4,1,1,2,5,8,-3,4
-OGC Nice,4,1,1,2,2,6,-4,4
-Angers SCO,4,1,-,3,5,8,-3,3
-Girondins De Bordeaux,4,1,-,3,3,7,-4,3
-En Avant Guingamp,4,-,-,4,3,10,-7,0
+Paris Saint-Germain,9,9,-,-,32,6,26,27
+Lille OSC,9,6,1,2,17,7,10,19
+Olympique Marseille,9,5,1,3,21,16,5,16
+Montpellier HSC,9,4,4,1,12,7,5,16
+AS Saint-Etienne,9,4,3,2,11,12,-1,15
+Olympique Lyonnais,9,4,2,3,14,12,2,14
+Girondins De Bordeaux,9,4,2,3,13,11,2,14
+Toulouse,9,3,4,2,10,12,-2,13
+RC Strasbourg,9,3,3,3,16,13,3,12
+Angers SCO,9,3,2,4,11,12,-1,11
+Stade Rennes,9,3,2,4,12,14,-2,11
+OGC Nice,9,3,2,4,7,13,-6,11
+SC Amiens,9,3,1,5,11,13,-2,10
+Nimes Olympique,9,2,4,3,13,16,-3,10
+Caen,9,2,4,3,10,13,-3,10
+Dijon FCO,9,3,1,5,9,13,-4,10
+Stade Reims,9,2,4,3,4,9,-5,10
+AS Monaco,9,1,3,5,9,13,-4,6
+FC Nantes,9,1,3,5,8,16,-8,6
+En Avant Guingamp,9,1,2,6,6,18,-12,5
