@@ -1,91 +1,79 @@
 from cinema import Cinema
 from DB import DB
-from colorama import Fore
-import sys
 from ticket import Ticket
+from user import User
 
-
-def printTicket(cinema):
-    ticket = Ticket(cinema)
-    print("\nYour ticket:\n{}".format(ticket))   
-    systemCheck("end")
-
-def systemCheck(request):
-    if request == "end" or request == "break" or request == "close":
-        return sys.exit(0)
-
-def main():
-    print()
-    print("Welcome to the ticketing service.\n")
+def buyTicket(user):
     db = DB()
     data = db.select('Cinema', ['cinema_id', 'cinema'])
-    print("List of cinemas (ID):")
-    request = ""
-    ch = False
+    # Choose cinema
     while True:
+        print()
         for dt in data:
             print(dt[0], dt[1])
-        request = input("\nChoose one of these cinemas:\n>> ")
-        systemCheck(request)
+        request = input("\n<> Choose one of these cinemas:\n>> ")
+        if request == 'back':
+            return False, "Back"
         try:
             request = int(request)
         except:
-            print('<> Please, enter INTEGER number!')
+            print('\n!!! Please, enter INTEGER number!')
             continue
         if request < 1 or request > len(data):
-            print("<> Сhoose cinemas that do not exceed the number of cinemas")
+            print("\n!!! Сhoose cinemas that do not exceed the number of cinemas")
             continue
-        #print(data[0][request-1], data[1][request-1])
         cinema = Cinema(data[request-1][0], data[request-1][1])
-        for kino in cinema.listKino:
-            print(kino["id"], kino["name"])
+        # Choose movie
         while True:
-            request = input("\nChoose the movie you want to watch:\n>> ")
+            print()
+            for kino in cinema.listKino:
+                print(kino["id"], kino["name"])
+            request = input("\n<> Choose the movie you want to watch:\n>> ")
             if request == "back":
                 break
-            systemCheck(request)
             try:
                 request = int(request)
             except:
-                print('<> Please, enter INTEGER number!')
+                print('\n!!! Please, enter INTEGER number!')
                 continue
             if request < 1 or request > len(cinema.listKino):
-                print("<> Choose films that do not exceed the amount of film")
+                print("\n!!! Choose films that do not exceed the amount of film")
                 continue
             cinema.setChosenKino(request)
-
-            print("ID","Time","Price")
-            for time in cinema.getTimes():
-                print(time['id'], time['time'], time['price'])
+            # Choose time
             while True:
-                request = input("\nChoose one of these times:\n>> ")
-                systemCheck(request)
+                print("\n","ID","Time","Price")
+                time_id = 1
+                for time in cinema.getTimes():
+                    print(time_id, time['id'], time['time'], time['price'])
+                    time_id += 1
+                request = input("\n<> Choose one of these times:\n>> ")
                 if request == "back":
                     break
                 try:
                     request = int(request)
                 except:
-                    print('<> Please, enter INTEGER numbers!')
+                    print('\n!!! Please, enter INTEGER numbers!')
                     continue
-                if request < cinema.getTimes()[0]['id'] or request > cinema.getTimes()[len(cinema.getTimes())-1]['id']:
-                    print("<> Select a time that does not exceed the ID time")
+                if request < 1 or request > time_id:
+                    print("\n!!! Select a time that does not exceed the ID time")
                     continue
-                cinema.setChosenTime(request)
-
+                cinema.setChosenTime(cinema.getTimes()[request-1]['id'])
+                # Choose place
                 placeArr = []
-                for place in cinema.getPlaces():
-                    if place['status'] == 0:
-                        print(place['place'], end="  ")
-                        placeArr.append(place['place'])
                 while True:
-                    systemCheck(request)
+                    print()
+                    for place in cinema.getPlaces():
+                        if place['status'] == 0:
+                            print(place['place'], end="  ")
+                            placeArr.append(place['place'])
+                    request = input("\n<> Select one or more places (with a space):\n>> ")
                     if request == "back":
                         break
-                    request = input("\nSelect one or more places (with a space):\n>> ")
                     try:
                         request = [int(i) for i in request.split()]
                     except:
-                        print('<> Please, enter INTEGER numbers!')
+                        print('\n!!! Please, enter INTEGER numbers!')
                         continue
                     ch = True
                     for req in request:
@@ -98,7 +86,69 @@ def main():
                     else:
                         cinema.setChosenPlaces(request)
                         print("Perfect thank you!")
-                    printTicket(cinema)
+                        return True, cinema
+
+def main():
+    print("\nWelcome to the ticketing service.")
+    user = User()
+    request = None
+    while True:
+        while True:
+            checkIn = False
+            isCreated = False
+            print("\n<> 1. Sing In\n<> 2. Create Account\n<> 3. Turn off the system")
+            request = input(">> ")
+            if request == "3":
+                user = User()
+                print("\nGoodbye. We'll be waiting for you!")
+                break
+            # sing in
+            elif request == "1":
+                login = input("Your login:\n>> ")
+                password = input("Your password:\n>> ")
+                if user.checkUser(login, password):
+                    checkIn = True
+            # registration
+            elif request == "2":
+                login = input("Your login:\n>> ")
+                password = input("Your password:\n>> ")
+                name = input("What is your name:\n>> ")
+                if not user.createUser(login, password, name):
+                    isCreated = True
+            if checkIn:
+                break
+            elif isCreated:
+                print("\n!!! Choose another login. This already exists")
+            else:
+                print("\n!!! Wrong login or password. Try again\n")
+        if request == "3":
+            break
+        isLogout = False
+        while True:
+            print("\n<> 1. Buy ticket\n<> 2. My ticket\n<> 3. Log out")
+            request = input(">> ")
+            if request == "3":
+                user = User()
+                isLogout = True
+                break
+            elif request == "1":
+                buy = buyTicket(user)
+                if not buy[0]:
+                    continue
+                cinema = buy[1]
+                ticket = Ticket()
+                ticket.setTicket(cinema)
+                print("\nYour ticket:\n{}".format(ticket))
+                user.setTicket(ticket)
+            elif request == "2":
+                print()
+                for item in range(0, len(user.myTickets())):
+                    print(user.myTickets()[item])
+                    if item != len(user.myTickets())-1:
+                        print("-----------------------------")
+        if isLogout:
+            continue
+        
 
 if __name__ == '__main__':
 	main()
