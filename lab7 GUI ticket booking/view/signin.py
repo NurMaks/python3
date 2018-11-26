@@ -42,7 +42,7 @@ class Signin(tk.Frame):
         buttonSignin = tk.Button(self, text='Signin', relief=tk.GROOVE, font=("Helvetica", 12), command=self.button_signin)
         buttonSignin.pack(fill='x', pady=10, ipady=5)
 
-        back = tk.Button(self, text='Back', relief=tk.GROOVE, font=("Helvetica", 12), command=lambda:self.controller.show_page("Welcome"))
+        back = tk.Button(self, text='Back', relief=tk.GROOVE, font=("Helvetica", 12), command=self.back)
         back.pack(fill='x', pady=10, ipady=5)
     
     def button_signin(self):
@@ -57,3 +57,7 @@ class Signin(tk.Frame):
                 self.errorLabel.config(text='Choose another login. This already exists')
         else:
             self.errorLabel.config(text='E R R O R')
+        
+    def back(self):
+        self.controller.create_pages()
+        self.controller.show_page("Welcome")

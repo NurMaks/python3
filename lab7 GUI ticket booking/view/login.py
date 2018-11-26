@@ -31,7 +31,7 @@ class Login(tk.Frame):
         buttonLogin = tk.Button(self, text='Login', relief=tk.GROOVE, font=("Helvetica", 12), command=self.button_login)
         buttonLogin.pack(fill='x', pady=10, ipady=5)
 
-        back = tk.Button(self, text='Back', relief=tk.GROOVE, font=("Helvetica", 12), command=lambda:self.controller.show_page("Welcome"))
+        back = tk.Button(self, text='Back', relief=tk.GROOVE, font=("Helvetica", 12), command=self.back)
         back.pack(fill='x', pady=10, ipady=5)
     
     def button_login(self):
@@ -40,6 +40,11 @@ class Login(tk.Frame):
         if self.model.user.checkUser(login, password):
             self.entryLogin.config(text="")
             self.entryPassword.config(text='')
+            self.controller.create_pages()
             self.controller.show_page("HomePage")
         else:
             self.errorLabel.config(text="Wrong login or password. Try again")
+    
+    def back(self):
+        self.controller.create_pages()
+        self.controller.show_page("Welcome")

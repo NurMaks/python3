@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Sign In</title>
+</head>
+<body>
+    <nav class="navbar-light bg-light navbar-expand-lg">
+        <nav class="nav nav-pills nav-fill">
+            <a class="nav-item nav-link active" href="#">Sign In</a>
+            <a class="nav-item nav-link" href="../../signup">Sign Up</a>
+        </nav>
+    </nav>
+
+    <div class="text-center" style="padding-top: 10%; padding-left: 30%; padding-right: 30%">
+        <form class="form-signin" action="../../user/signin/" method="post">
+            <h1 class="h5 mb-3 font-weight-normal">Please sign in</h1>
+            <label for="email" class="sr-only">Email address</label>
+            <input type="text" id="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+            
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required style="margin-top: 5px">
+            
+            <div class="checkbox mb-3">
+                <label>
+                <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            {% if error %}
+                <div class="alert alert-danger">
+                    <strong>Error!</strong> {{ error }}
+                </div>
+            {% endif %}
+            <button class="btn btn-lg btn-outline-primary btn-block" type="submit">Sign in</button>
+            <p class="text-muted" style="margin-top: 40%">&copy; 2018-2019</p>
+        </form>
+    </div>
+
+</body>
+</html>

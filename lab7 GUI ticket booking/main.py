@@ -5,6 +5,9 @@ from view.signin import Signin
 from view.homePage import HomePage
 from controller.model import Model
 from view.myTickets import MyTickets
+from view.buyTicket import BuyTicket
+from view.time import Time
+from view.place import Place
 
 class Main(tk.Tk):
     def __init__(self):
@@ -17,25 +20,26 @@ class Main(tk.Tk):
         self.container.pack(side='top', expand=True)
         self.container.grid_columnconfigure(0, weight=1)
         self.container.grid_rowconfigure(0, weight=1)
-
-        self.pages = {}
+        self.model = Model()
         self.create_pages()
+        self.show_page("Welcome")
     
     def create_pages(self):
-        model = Model()
+        self.pages = {}
         arr = [
             'Welcome',
             'Login',
             'Signin',
             'HomePage',
-            'MyTickets'
+            'MyTickets',
+            'BuyTicket',
+            'Time',
+            'Place'
         ]
         for page in arr:
-            frame = eval(page)(self.container, self, model)
-            frame.grid(row=0, column=0, sticky='wsne', ipadx=100, ipady=10)
+            frame = eval(page)(self.container, self, self.model)
+            frame.grid(row=0, column=0, sticky='wsne', ipadx=100)
             self.pages[page] = frame
-        
-        self.show_page("Welcome")
     
     def show_page(self, page):
         frame = self.pages[page]

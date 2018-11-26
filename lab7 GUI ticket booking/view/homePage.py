@@ -9,7 +9,7 @@ class HomePage(tk.Frame):
         title = tk.Label(self, text="H O M E P A G E", font=("Helvetica", 20))
         title.pack()
 
-        buyTicket = tk.Button(self, text='Buy ticket', relief=tk.GROOVE, font=("Helvetica", 12) ) # command=lambda:controller.show_page("Login")
+        buyTicket = tk.Button(self, text='Buy ticket', relief=tk.GROOVE, font=("Helvetica", 12), command=self.buy_ticket) # command=lambda:
         buyTicket.pack(fill='x', pady=10, ipady=10)
 
         myTicket = tk.Button(self, text='My ticket', relief=tk.GROOVE, font=("Helvetica", 12), command=self.my_tickets) # command=lambda:
@@ -18,9 +18,16 @@ class HomePage(tk.Frame):
         logout = tk.Button(self, text='Log out', relief=tk.GROOVE, font=("Helvetica", 12), command=self.logout) 
         logout.pack(fill='x', pady=10, ipady=10)
     
+    def buy_ticket(self):
+        self.controller.create_pages()
+        self.controller.show_page("BuyTicket")
+
     def my_tickets(self):
+        self.model.myTickets.listMyTickets(self.model.user.id)
+        self.controller.create_pages()
         self.controller.show_page("MyTickets")
 
     def logout(self):
         self.model = None
+        self.controller.create_pages()
         self.controller.show_page("Welcome")

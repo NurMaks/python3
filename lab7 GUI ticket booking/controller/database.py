@@ -40,11 +40,3 @@ class DB:
         request = "INSERT INTO Tickets VALUES ("+str(id)+", "+str(user_id)+", '"+cinema+"', '"+kino+"', '"+time+"', '"+str(place)[1:-1]+"', "+str(price)+", "+str(totalPrice)+");"
         self.c.execute(request)
         self.conn.commit()
-
-# Tables:
-# Cinema => cinema_id, cinema
-# Kino   => kino_id, kino
-# Time   => time_id, cinema_id, kino_id, time, price
-# Hall   => hall_id, time_id, placeNumber, status
-# User   => user_id INTEGER, login TEXT, password TEXT, name TEXT
-# Tickets => ticket_id INTEGER, user_id INTEGER, cinema TEXT, kino TEXT, time TEXT, place TEXT, price REAL, totalPrice REAL
