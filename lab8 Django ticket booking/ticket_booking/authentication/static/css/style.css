@@ -1,0 +1,20 @@
+.navbar-style{
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+.div-add-cinema{
+    margin-top: 20px;
+}
+.btn-add-cinema{
+    width: 150px;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.input-form-group{
+    width: 35%;
+    display: inline-block;
+}
+.input-button{
+    width: 15%;
+}

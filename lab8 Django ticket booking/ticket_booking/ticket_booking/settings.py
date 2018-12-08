@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'authentication',
     'users',
     'films',
+    'cinemas',
 
     'django.contrib.admin',
     'django.contrib.auth',

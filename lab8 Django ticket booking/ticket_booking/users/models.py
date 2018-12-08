@@ -5,7 +5,7 @@ class User(models.Model):
     password = models.CharField(max_length=100)
     fname = models.CharField(max_length=100)
     lname = models.CharField(max_length=100)
-    priority = models.CharField(max_length=20, default='user')
+    priority = models.CharField(max_length=20, default="user")
 
     def __str__(self):
         data = {
