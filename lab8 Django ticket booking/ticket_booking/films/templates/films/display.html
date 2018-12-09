@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <title>Cinema</title>
+    <title>Film</title>
 </head>
 <body style="width:85%; margin:auto">
     <nav class="navbar-light navbar-expand-lg navbar-style">
         <nav class="nav nav-pills nav-fill">
-            <a class="nav-item nav-link" href="{% url 'list_films' %}">Films</a>
-            <a class="nav-item nav-link active" href="{% url 'list_cinemas' %}">Cinemas</a>
+            <a class="nav-item nav-link active" href="{% url 'list_films' %}">Films</a>
+            <a class="nav-item nav-link" href="{% url 'list_cinemas' %}">Cinemas</a>
             <a class="nav-item nav-link" href="{% url 'my_ticket' %}">My Tickets</a>
             <a class="nav-item nav-link" href="{% url 'logout' %}">Log out</a>
         </nav>
@@ -23,29 +23,26 @@
     
     <div class="card" style="margin-top: 30px;">
         <div class="card-body">
-            <h5 class="card-title">{{cinema.name}}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{cinema.address}}</h6>
+            <h5 class="card-title">Film: {{ film.name }}</h5>
+            <h6 class="card-subtitle mb-2">Seances</h6>
         </div>
     </div>
 
     <div id="accordion" style="margin-top:25px">
-        {% for key, value in film.items %}
+        {% for key, value in ceance.items %}
         <div class="card">
             <div class="card-header" id="heading{{key.id}}">
                 <h5 class="mb-0">
                     <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse{{key.id}}" aria-expanded="false" aria-controls="collapse{{key.id}}">
                         {{ key }}
                     </button>
-                    {% if user.priority == 'admin' %}
-                    <a href="../../films/delete/{{key.id}}/{{cinema.id}}" class="btn btn-outline-secondary">Delete</a>
-                    {% endif %}
                 </h5>
             </div>
             <div id="collapse{{key.id}}" class="collapse" aria-labelledby="heading{{key.id}}" data-parent="#accordion">
                 {% for itemKey, itemValue in value.items %}
                 <div class="card">
                     <div class="card-body">
-                        <a href="../films/choose/{{itemKey}}" class="btn btn-info">Choose</a>
+                        <a href="choose/{{itemKey}}" class="btn btn-info">Choose</a>
                         <small class="text-muted">Time:</small> {{ itemValue.0 }}
                         <small class="text-muted">Price:</small> {{ itemValue.1 }}
                     </div>

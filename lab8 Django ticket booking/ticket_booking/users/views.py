@@ -6,14 +6,13 @@ from rest_framework.status import (
 )
 from rest_framework.decorators import api_view
 from .forms import UserSigninForms, UserSignupForm
-from .models import User
+from .models import User, MyTicket
 from .serializers import UserSerializer
 import json
 def convertToDict(user):
     data = {
         'id': user.id,
-        'fname': user.fname,
-        'lname': user.lname,
+        'name': user.fname+" "+user.lname,
         'email': user.email,
         'priority': user.priority
     }
@@ -50,4 +49,7 @@ def signup(request):
     createSession(request, form)
     return redirect('/films/')
     
-# render(request, 'films/films.html', {'priority': user['priority'].value}, status=HTTP_200_OK)
+def myticket(request):
+    user = json.loads(request.session['user'])
+    ticket = MyTicket.objects.filter(user=User.objects.get(pk=user['id']))
+    return render(request, 'myticket/myticket.html', {'user':user, 'ticket':ticket})

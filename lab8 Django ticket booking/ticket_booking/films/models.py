@@ -15,7 +15,7 @@ class Ceance(models.Model):
     cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.time+" "+self.price
+        return self.time+" "+str(self.price)
 
 class Place(models.Model):
     place = models.IntegerField()
@@ -23,4 +23,4 @@ class Place(models.Model):
     ceance = models.ForeignKey(Ceance, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.place
+        return str(self.place)

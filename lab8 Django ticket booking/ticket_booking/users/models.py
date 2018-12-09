@@ -1,4 +1,5 @@
 from django.db import models
+from films.models import Place
 
 class User(models.Model):
     email = models.CharField(max_length=100, unique=True)
@@ -8,11 +9,11 @@ class User(models.Model):
     priority = models.CharField(max_length=20, default="user")
 
     def __str__(self):
-        data = {
-            'email': self.email,
-            'password': self.password,
-            'fname': self.fname,
-            'lname': self.lname,
-            'priority': self.priority
-        }
-        return str(data)
+        return self.fname+" "+self.lname
+    
+class MyTicket(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.user)

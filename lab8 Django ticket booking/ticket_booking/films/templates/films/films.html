@@ -16,10 +16,7 @@
         <nav class="nav nav-pills nav-fill">
             <a class="nav-item nav-link active" href="{% url 'list_films' %}">Films</a>
             <a class="nav-item nav-link" href="{% url 'list_cinemas' %}">Cinemas</a>
-            <a class="nav-item nav-link" href="#">My Tickets</a>
-            {% if user.priority == 'admin' %}
-                <a class="nav-item nav-link" href="#">Users</a>
-            {% endif %}
+            <a class="nav-item nav-link" href="{% url 'my_ticket' %}">My Tickets</a>
             <a class="nav-item nav-link" href="{% url 'logout' %}">Log out</a>
         </nav>
     </nav>
@@ -109,7 +106,7 @@
         <img class="card-img-top" src="{{ item.image }}" alt="Card image cap" style="height: 210px;">
         <div class="card-body">
             <div class="card-title">{{ item.name }}</div>
-            <a href="{{item.id}}" class="btn btn-outline-secondary">View</a>
+            <a href="{{ item.id }}" class="btn btn-outline-secondary">View</a>
         </div>
       </div>
     {% endfor %}

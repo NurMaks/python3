@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
 from .models import Cinema
+from films.models import Ceance, Film
 from .serializers import CinemaSerializer
 import json
 from django import forms
@@ -21,7 +22,13 @@ def add_cinema(request):
 def item(request, id):
     user = json.loads(request.session['user'])
     cinema = Cinema.objects.get(pk=id)
-    return render(request, 'cinema/item.html', {'user':user, 'cinema':cinema})
+    film = {}
+    for item in Ceance.objects.filter(cinema=cinema):
+        if item.film not in film:
+            film[item.film] = { item.id: [item.time,item.price] }
+        else:
+            film[item.film][item.id] = [item.time,item.price]
+    return render(request, 'cinema/item.html', {'user':user, 'cinema':cinema, 'film':film})
 
 def delete(request, id):
     cinema = Cinema.objects.get(pk=id)

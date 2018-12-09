@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <title>My Tickets</title>
+</head>
+<body style="width:85%; margin:auto">
+    <nav class="navbar-light navbar-expand-lg navbar-style">
+        <nav class="nav nav-pills nav-fill">
+            <a class="nav-item nav-link" href="{% url 'list_films' %}">Films</a>
+            <a class="nav-item nav-link" href="{% url 'list_cinemas' %}">Cinemas</a>
+            <a class="nav-item nav-link active" href="{% url 'my_ticket' %}">My Tickets</a>
+            <a class="nav-item nav-link" href="{% url 'logout' %}">Log out</a>
+        </nav>
+    </nav>
+    
+    <div class="card" style="margin-top: 30px;">
+        <div class="card-body">
+            <h5 class="card-title">User: {{ user.name }}</h5>
+            <h6 class="card-subtitle mb-2">Tickets</h6>
+        </div>
+    </div>
+
+    {% for item in ticket %}
+    <div class="card text-white bg-info mb-3" style="max-width:18rem; display:inline-block; margin:30px 30px 0 0;">
+        <div class="card-header">{{item.place.ceance.cinema}}</div>
+        <div class="card-body">
+            <h5 class="card-text">{{item.place.ceance.film}}</h5>
+        </div>
+        <div class="card-footer bg-transparent">
+            <div style="display:inline-block; margin-right:5px;">
+                Time: {{item.place.ceance.time}}
+            </div>
+            <div style="display:inline-block; margin-right:5px;">
+                Price: {{item.place.ceance.price}}
+            </div>
+            <div style="display:inline-block; margin-right:5px;">
+                Seat: {{item.place.place}}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</body>
+</html>
